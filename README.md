@@ -1,6 +1,6 @@
 # Webdev BE Project 001
 
-Tech: .NET 7 + EF
+Tech: .NET 7 + EF (code first)
 
 ## Reference
 
@@ -10,9 +10,29 @@ Tech: .NET 7 + EF
 
 ### Program entry point
 
+- DI and all three A
+
 ### Models
 
 - `namespace`:
 - `IClt` vs `IList`
 
+### Config
+
+- `appsettings.json`:
+  - contains conn string here
+
+### Seeding
+
+- `Add-Migration InitialCreate` -> `Update-Database` -> `dotnet run seeddata` at the location of `Program.cs`
+
 ## Notes
+
+<details>
+<summary>How to get a connection string</summary>
+
+1. VS -> Search bar -> SQL Server Object Explorer -> click icon Add SQL Server
+2. Go to SQL Server Manga Studio -> Props -> get the Name (e.g. DESKTOP-123ABC)
+3. After establish conn in VS, Props the desired DB -> Find the ConnStr in there
+
+</details>
