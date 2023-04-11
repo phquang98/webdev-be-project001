@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Gym { get; set; }
         public Country Country { get; set; }
-        public ICollection<JoinPokemonOwner> PokemonOwners { get; set; }
+        public ICollection<JoinPokemonOwner> PokemonOwnerClt { get; set; }
     }
 }

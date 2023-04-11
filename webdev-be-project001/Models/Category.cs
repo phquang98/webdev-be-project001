@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<JoinPokemonCategory> PokemonCategories { get; set; }
+        public ICollection<JoinPokemonCategory> PokemonCategoryClt { get; set; }
     }
 }

@@ -7,17 +7,16 @@ namespace webdev_be_project001.Data
     {
         public DataCtx(DbContextOptions<DataCtx> options) : base(options)
         { 
-            
         }
 
-        public DbSet<Category> CategoryClt { get; set; }
-        public DbSet<Country> CountryClt { get; set; }
-        public DbSet<Owner> OwnerClt { get; set; }
-        public DbSet<Pokemon> PokemonClt { get; set; }
-        public DbSet<JoinPokemonOwner> PokemonOwnerClt { get; set; }
-        public DbSet<JoinPokemonCategory> PokemonCategoryClt { get; set; }
-        public DbSet<Review> ReviewClt { get; set; }
-        public DbSet<Reviewer> ReviewerClt { get; set; }
+        public DbSet<Category> CategoryTable { get; set; }
+        public DbSet<Country> CountryTable { get; set; }
+        public DbSet<Owner> OwnerTable { get; set; }
+        public DbSet<Pokemon> PokemonTable { get; set; }
+        public DbSet<JoinPokemonOwner> PokemonOwnerTable { get; set; }
+        public DbSet<JoinPokemonCategory> PokemonCategoryTable { get; set; }
+        public DbSet<Review> ReviewTable { get; set; }
+        public DbSet<Reviewer> ReviewerTable { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,22 +24,22 @@ namespace webdev_be_project001.Data
                     .HasKey(pc => new { pc.PokemonId, pc.CategoryId });
             modelBuilder.Entity<JoinPokemonCategory>()
                     .HasOne(p => p.Pokemon)
-                    .WithMany(pc => pc.PokemonCategories)
+                    .WithMany(pc => pc.PokemonCategoryClt)
                     .HasForeignKey(p => p.PokemonId);
             modelBuilder.Entity<JoinPokemonCategory>()
                     .HasOne(p => p.Category)
-                    .WithMany(pc => pc.PokemonCategories)
+                    .WithMany(pc => pc.PokemonCategoryClt)
                     .HasForeignKey(c => c.CategoryId);
 
             modelBuilder.Entity<JoinPokemonOwner>()
                     .HasKey(po => new { po.PokemonId, po.OwnerId });
             modelBuilder.Entity<JoinPokemonOwner>()
                     .HasOne(p => p.Pokemon)
-                    .WithMany(pc => pc.PokemonOwners)
+                    .WithMany(pc => pc.PokemonOwnerClt)
                     .HasForeignKey(p => p.PokemonId);
             modelBuilder.Entity<JoinPokemonOwner>()
                     .HasOne(p => p.Owner)
-                    .WithMany(pc => pc.PokemonOwners)
+                    .WithMany(pc => pc.PokemonOwnerClt)
                     .HasForeignKey(c => c.OwnerId);
         }
     }

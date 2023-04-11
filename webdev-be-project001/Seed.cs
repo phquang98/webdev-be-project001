@@ -14,7 +14,7 @@ namespace webdev_be_project001
 
         public void SeedDataContext()
         {
-            if (!dataContext.PokemonOwnerClt.Any())
+            if (!dataContext.PokemonOwnerTable.Any())
             {
                 var pokemonOwners = new List<JoinPokemonOwner>()
                 {
@@ -24,14 +24,14 @@ namespace webdev_be_project001
                         {
                             Name = "Pikachu",
                             DOB = new DateTime(1903, 1, 1),
-                            PokemonCategories = new List<JoinPokemonCategory>()
+                            PokemonCategoryClt = new List<JoinPokemonCategory>()
                             {
                                 new JoinPokemonCategory
                                 {
                                     Category = new Category() { Name = "Electric" }
                                 }
                             },
-                            Reviews = new List<Review>()
+                            ReviewClt = new List<Review>()
                             {
                                 new Review
                                 {
@@ -81,14 +81,14 @@ namespace webdev_be_project001
                         {
                             Name = "Squirtle",
                             DOB = new DateTime(1903, 1, 1),
-                            PokemonCategories = new List<JoinPokemonCategory>()
+                            PokemonCategoryClt = new List<JoinPokemonCategory>()
                             {
                                 new JoinPokemonCategory
                                 {
                                     Category = new Category() { Name = "Water" }
                                 }
                             },
-                            Reviews = new List<Review>()
+                            ReviewClt = new List<Review>()
                             {
                                 new Review
                                 {
@@ -138,14 +138,14 @@ namespace webdev_be_project001
                         {
                             Name = "Venasuar",
                             DOB = new DateTime(1903, 1, 1),
-                            PokemonCategories = new List<JoinPokemonCategory>()
+                            PokemonCategoryClt = new List<JoinPokemonCategory>()
                             {
                                 new JoinPokemonCategory
                                 {
                                     Category = new Category() { Name = "Leaf" }
                                 }
                             },
-                            Reviews = new List<Review>()
+                            ReviewClt = new List<Review>()
                             {
                                 new Review
                                 {
@@ -190,7 +190,7 @@ namespace webdev_be_project001
                         }
                     }
                 };
-                dataContext.PokemonOwnerClt.AddRange(pokemonOwners);
+                dataContext.PokemonOwnerTable.AddRange(pokemonOwners);
                 dataContext.SaveChanges();
             }
         }
