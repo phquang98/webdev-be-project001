@@ -16,6 +16,7 @@ Tech: .NET 7 + EF (code first)
 
 - `namespace`:
 - `IClt` vs `IList`
+  - `IClt` can only be shown, read
 
 ### Config
 

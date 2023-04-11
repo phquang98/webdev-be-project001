@@ -36,7 +36,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryClt");
+                    b.ToTable("CategoryTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Country", b =>
@@ -53,7 +53,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CountryClt");
+                    b.ToTable("CountryTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.JoinPokemonCategory", b =>
@@ -68,7 +68,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("PokemonCategoryClt");
+                    b.ToTable("PokemonCategoryTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.JoinPokemonOwner", b =>
@@ -83,7 +83,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("PokemonOwnerClt");
+                    b.ToTable("PokemonOwnerTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Owner", b =>
@@ -109,7 +109,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("OwnerClt");
+                    b.ToTable("OwnerTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Pokemon", b =>
@@ -129,7 +129,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("PokemonClt");
+                    b.ToTable("PokemonTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Review", b =>
@@ -163,7 +163,7 @@ namespace webdev_be_project001.Migrations
 
                     b.HasIndex("ReviewerId");
 
-                    b.ToTable("ReviewClt");
+                    b.ToTable("ReviewTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Reviewer", b =>
@@ -184,19 +184,19 @@ namespace webdev_be_project001.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ReviewerClt");
+                    b.ToTable("ReviewerTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.JoinPokemonCategory", b =>
                 {
                     b.HasOne("webdev_be_project001.Models.Category", "Category")
-                        .WithMany("PokemonCategories")
+                        .WithMany("PokemonCategoryClt")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webdev_be_project001.Models.Pokemon", "Pokemon")
-                        .WithMany("PokemonCategories")
+                        .WithMany("PokemonCategoryClt")
                         .HasForeignKey("PokemonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -209,13 +209,13 @@ namespace webdev_be_project001.Migrations
             modelBuilder.Entity("webdev_be_project001.Models.JoinPokemonOwner", b =>
                 {
                     b.HasOne("webdev_be_project001.Models.Owner", "Owner")
-                        .WithMany("PokemonOwners")
+                        .WithMany("PokemonOwnerClt")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webdev_be_project001.Models.Pokemon", "Pokemon")
-                        .WithMany("PokemonOwners")
+                        .WithMany("PokemonOwnerClt")
                         .HasForeignKey("PokemonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -228,7 +228,7 @@ namespace webdev_be_project001.Migrations
             modelBuilder.Entity("webdev_be_project001.Models.Owner", b =>
                 {
                     b.HasOne("webdev_be_project001.Models.Country", "Country")
-                        .WithMany("Owners")
+                        .WithMany("OwnerClt")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -239,13 +239,13 @@ namespace webdev_be_project001.Migrations
             modelBuilder.Entity("webdev_be_project001.Models.Review", b =>
                 {
                     b.HasOne("webdev_be_project001.Models.Pokemon", "Pokemon")
-                        .WithMany("Reviews")
+                        .WithMany("ReviewClt")
                         .HasForeignKey("PokemonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webdev_be_project001.Models.Reviewer", "Reviewer")
-                        .WithMany("Reviews")
+                        .WithMany("ReviewClt")
                         .HasForeignKey("ReviewerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -257,31 +257,31 @@ namespace webdev_be_project001.Migrations
 
             modelBuilder.Entity("webdev_be_project001.Models.Category", b =>
                 {
-                    b.Navigation("PokemonCategories");
+                    b.Navigation("PokemonCategoryClt");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Country", b =>
                 {
-                    b.Navigation("Owners");
+                    b.Navigation("OwnerClt");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Owner", b =>
                 {
-                    b.Navigation("PokemonOwners");
+                    b.Navigation("PokemonOwnerClt");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Pokemon", b =>
                 {
-                    b.Navigation("PokemonCategories");
+                    b.Navigation("PokemonCategoryClt");
 
-                    b.Navigation("PokemonOwners");
+                    b.Navigation("PokemonOwnerClt");
 
-                    b.Navigation("Reviews");
+                    b.Navigation("ReviewClt");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Reviewer", b =>
                 {
-                    b.Navigation("Reviews");
+                    b.Navigation("ReviewClt");
                 });
 #pragma warning restore 612, 618
         }

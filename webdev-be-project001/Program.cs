@@ -2,11 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 using webdev_be_project001;
 using webdev_be_project001.Data;
+using webdev_be_project001.Interfaces;
+using webdev_be_project001.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // --- Add DI
 builder.Services.AddTransient<Seed>();
+builder.Services.AddScoped<IPokemonRepo, PokemonRepo>();
 
 // --- Add services
 
@@ -43,6 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.MapControllers();
+
 
 // --- Start
 

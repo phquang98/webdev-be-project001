@@ -12,7 +12,7 @@ namespace webdev_be_project001.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CategoryClt",
+                name: "CategoryTable",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryClt", x => x.Id);
+                    table.PrimaryKey("PK_CategoryTable", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CountryClt",
+                name: "CountryTable",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,11 +34,11 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CountryClt", x => x.Id);
+                    table.PrimaryKey("PK_CountryTable", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PokemonClt",
+                name: "PokemonTable",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -48,11 +48,11 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonClt", x => x.ID);
+                    table.PrimaryKey("PK_PokemonTable", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReviewerClt",
+                name: "ReviewerTable",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -62,11 +62,11 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReviewerClt", x => x.Id);
+                    table.PrimaryKey("PK_ReviewerTable", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OwnerClt",
+                name: "OwnerTable",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -77,17 +77,17 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OwnerClt", x => x.Id);
+                    table.PrimaryKey("PK_OwnerTable", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OwnerClt_CountryClt_CountryId",
+                        name: "FK_OwnerTable_CountryTable_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "CountryClt",
+                        principalTable: "CountryTable",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PokemonCategoryClt",
+                name: "PokemonCategoryTable",
                 columns: table => new
                 {
                     PokemonId = table.Column<int>(type: "int", nullable: false),
@@ -95,23 +95,23 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonCategoryClt", x => new { x.PokemonId, x.CategoryId });
+                    table.PrimaryKey("PK_PokemonCategoryTable", x => new { x.PokemonId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_PokemonCategoryClt_CategoryClt_CategoryId",
+                        name: "FK_PokemonCategoryTable_CategoryTable_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "CategoryClt",
+                        principalTable: "CategoryTable",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PokemonCategoryClt_PokemonClt_PokemonId",
+                        name: "FK_PokemonCategoryTable_PokemonTable_PokemonId",
                         column: x => x.PokemonId,
-                        principalTable: "PokemonClt",
+                        principalTable: "PokemonTable",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReviewClt",
+                name: "ReviewTable",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -124,23 +124,23 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReviewClt", x => x.Id);
+                    table.PrimaryKey("PK_ReviewTable", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ReviewClt_PokemonClt_PokemonID",
+                        name: "FK_ReviewTable_PokemonTable_PokemonID",
                         column: x => x.PokemonID,
-                        principalTable: "PokemonClt",
+                        principalTable: "PokemonTable",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ReviewClt_ReviewerClt_ReviewerId",
+                        name: "FK_ReviewTable_ReviewerTable_ReviewerId",
                         column: x => x.ReviewerId,
-                        principalTable: "ReviewerClt",
+                        principalTable: "ReviewerTable",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PokemonOwnerClt",
+                name: "PokemonOwnerTable",
                 columns: table => new
                 {
                     PokemonId = table.Column<int>(type: "int", nullable: false),
@@ -148,44 +148,44 @@ namespace webdev_be_project001.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonOwnerClt", x => new { x.PokemonId, x.OwnerId });
+                    table.PrimaryKey("PK_PokemonOwnerTable", x => new { x.PokemonId, x.OwnerId });
                     table.ForeignKey(
-                        name: "FK_PokemonOwnerClt_OwnerClt_OwnerId",
+                        name: "FK_PokemonOwnerTable_OwnerTable_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "OwnerClt",
+                        principalTable: "OwnerTable",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PokemonOwnerClt_PokemonClt_PokemonId",
+                        name: "FK_PokemonOwnerTable_PokemonTable_PokemonId",
                         column: x => x.PokemonId,
-                        principalTable: "PokemonClt",
+                        principalTable: "PokemonTable",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OwnerClt_CountryId",
-                table: "OwnerClt",
+                name: "IX_OwnerTable_CountryId",
+                table: "OwnerTable",
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PokemonCategoryClt_CategoryId",
-                table: "PokemonCategoryClt",
+                name: "IX_PokemonCategoryTable_CategoryId",
+                table: "PokemonCategoryTable",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PokemonOwnerClt_OwnerId",
-                table: "PokemonOwnerClt",
+                name: "IX_PokemonOwnerTable_OwnerId",
+                table: "PokemonOwnerTable",
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReviewClt_PokemonID",
-                table: "ReviewClt",
+                name: "IX_ReviewTable_PokemonID",
+                table: "ReviewTable",
                 column: "PokemonID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReviewClt_ReviewerId",
-                table: "ReviewClt",
+                name: "IX_ReviewTable_ReviewerId",
+                table: "ReviewTable",
                 column: "ReviewerId");
         }
 
@@ -193,28 +193,28 @@ namespace webdev_be_project001.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PokemonCategoryClt");
+                name: "PokemonCategoryTable");
 
             migrationBuilder.DropTable(
-                name: "PokemonOwnerClt");
+                name: "PokemonOwnerTable");
 
             migrationBuilder.DropTable(
-                name: "ReviewClt");
+                name: "ReviewTable");
 
             migrationBuilder.DropTable(
-                name: "CategoryClt");
+                name: "CategoryTable");
 
             migrationBuilder.DropTable(
-                name: "OwnerClt");
+                name: "OwnerTable");
 
             migrationBuilder.DropTable(
-                name: "PokemonClt");
+                name: "PokemonTable");
 
             migrationBuilder.DropTable(
-                name: "ReviewerClt");
+                name: "ReviewerTable");
 
             migrationBuilder.DropTable(
-                name: "CountryClt");
+                name: "CountryTable");
         }
     }
 }
