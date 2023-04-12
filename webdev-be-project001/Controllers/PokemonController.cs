@@ -19,14 +19,11 @@ namespace webdev_be_project001.Controllers
             _mapper = mapperHere;
         }
 
-
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Pokemon>))]
         public IActionResult CtrGetPokemonClt()
         {
-
-            var pokeRes = _mapper.Map<List<PokemonDto>>(_pokeRepo.GetPokemonClt()); 
-
+            var pokeRes = _mapper.Map<List<PokemonDto>>(_pokeRepo.GetPokemonClt());
 
             if (!ModelState.IsValid)
             {
@@ -46,14 +43,14 @@ namespace webdev_be_project001.Controllers
                 return NotFound();
             }
 
-            var pokemonRes = _mapper.Map<PokemonDto>(_pokeRepo.GetPokemon(pokeIdHere));
+            var pokeRes = _mapper.Map<PokemonDto>(_pokeRepo.GetPokemon(pokeIdHere));
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(pokemonRes);
+            return Ok(pokeRes);
         }
 
         [HttpGet("{pokeIdHere}/rating")]
@@ -75,6 +72,5 @@ namespace webdev_be_project001.Controllers
 
             return Ok(rating);
         }
-
     }
 }

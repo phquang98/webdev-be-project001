@@ -5,10 +5,13 @@ using webdev_be_project001.Models;
 
 namespace webdev_be_project001.Helpers
 {
-    public class MappingProfiles: Profile
+    public class MappingProfiles : Profile
     {
-        public MappingProfiles() {
+        public MappingProfiles()
+        {
             CreateMap<Pokemon, PokemonDto>();
+            CreateMap<Category, CategoryDto>();
+            CreateMap<Country, CountryDto>();
         }
     }
 }

@@ -5,9 +5,9 @@ namespace webdev_be_project001.Interfaces
     public interface IPokemonRepo
     {
         ICollection<Pokemon> GetPokemonClt();
-        Pokemon GetPokemon(int idParam);
+        Pokemon GetPokemon(int pokeIdParam);
         Pokemon GetPokemon(string nameParam);
-        decimal GetPokemonRating(int pokeId);
-        bool PokemonExists(int pokeId);
+        decimal GetPokemonRating(int pokeIdHere);
+        bool PokemonExists(int pokeIdHere);
     }
 }

@@ -18,9 +18,9 @@ namespace webdev_be_project001.Repositories
             return _ctx.PokemonTable.OrderBy(poke => poke.IdColumn).ToList();
         }
 
-        public Pokemon GetPokemon(int idParam)
+        public Pokemon GetPokemon(int pokeIdParam)
         {
-            return _ctx.PokemonTable.Where(poke => poke.IdColumn == idParam).FirstOrDefault();
+            return _ctx.PokemonTable.Where(poke => poke.IdColumn == pokeIdParam).FirstOrDefault();
         }
 
         public Pokemon GetPokemon(string nameParam)
@@ -28,9 +28,11 @@ namespace webdev_be_project001.Repositories
             return _ctx.PokemonTable.Where(poke => poke.NameColumn == nameParam).FirstOrDefault();
         }
 
-        public decimal GetPokemonRating(int pokeId)
+        public decimal GetPokemonRating(int pokeIdHere)
         {
-            var review = _ctx.ReviewTable.Where(record => record.PokemonColumn.IdColumn == pokeId);
+            var review = _ctx.ReviewTable.Where(
+                record => record.PokemonColumn.IdColumn == pokeIdHere
+            );
             Console.WriteLine(review);
 
             if (review.Count() <= 0)
@@ -40,12 +42,12 @@ namespace webdev_be_project001.Repositories
 
             var soBiChia = review.Sum(poke => poke.RatingColumn);
             var soChia = review.Count();
-            return ((decimal)review.Sum(rating => rating.RatingColumn) / review.Count());   
+            return ((decimal)review.Sum(rating => rating.RatingColumn) / review.Count());
         }
 
-        public bool PokemonExists(int pokeId)
+        public bool PokemonExists(int pokeIdHere)
         {
-            return _ctx.PokemonTable.Any(poke => poke.IdColumn == pokeId);
+            throw new NotImplementedException();
         }
     }
 }
