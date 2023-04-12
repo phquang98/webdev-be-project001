@@ -2,10 +2,10 @@
 {
     public class Owner
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Gym { get; set; }
-        public Country Country { get; set; }
+        public int IdColumn { get; set; }
+        public string NameColumn { get; set; }
+        public string GymColumn { get; set; }
+        public Country CountryColumn { get; set; }
         public ICollection<JoinPokemonOwner> PokemonOwnerClt { get; set; }
     }
 }

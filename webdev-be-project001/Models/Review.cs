@@ -2,11 +2,11 @@
 {
     public class Review
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
-        public int Rating { get; set; }
-        public Reviewer Reviewer { get; set; }
-        public Pokemon Pokemon { get; set; }
+        public int IdColumn { get; set; }
+        public string TitleColumn { get; set; }
+        public string TextColumn { get; set; }
+        public int RatingColumn { get; set; }
+        public Reviewer ReviewerColumn { get; set; }
+        public Pokemon PokemonColumn { get; set; }
     }
 }

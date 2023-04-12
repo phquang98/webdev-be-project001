@@ -2,8 +2,8 @@
 {
     public class Category
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int IdColumn { get; set; }
+        public string NameColumn { get; set; }
         public ICollection<JoinPokemonCategory> PokemonCategoryClt { get; set; }
     }
 }
