@@ -22,171 +22,171 @@ namespace webdev_be_project001
                     {
                         Pokemon = new Pokemon()
                         {
-                            Name = "Pikachu",
-                            DOB = new DateTime(1903, 1, 1),
+                            NameColumn = "Pikachu",
+                            DOBColumn = new DateTime(1903, 1, 1),
                             PokemonCategoryClt = new List<JoinPokemonCategory>()
                             {
                                 new JoinPokemonCategory
                                 {
-                                    Category = new Category() { Name = "Electric" }
+                                    Category = new Category() { NameColumn = "Electric" }
                                 }
                             },
                             ReviewClt = new List<Review>()
                             {
                                 new Review
                                 {
-                                    Title = "Pikachu",
-                                    Text = "Pickahu is the best pokemon, because it is electric",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Pikachu",
+                                    TextColumn = "Pickahu is the best pokemon, because it is electric",
+                                    RatingColumn = 5,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Teddy",
-                                        LastName = "Smith"
+                                        FirstNameColumn = "Teddy",
+                                        LastNameColumn = "Smith"
                                     }
                                 },
                                 new Review
                                 {
-                                    Title = "Pikachu",
-                                    Text = "Pickachu is the best a killing rocks",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Pikachu",
+                                    TextColumn = "Pickachu is the best a killing rocks",
+                                    RatingColumn = 5,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Taylor",
-                                        LastName = "Jones"
+                                        FirstNameColumn = "Taylor",
+                                        LastNameColumn = "Jones"
                                     }
                                 },
                                 new Review
                                 {
-                                    Title = "Pikachu",
-                                    Text = "Pickchu, pickachu, pikachu",
-                                    Rating = 1,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Pikachu",
+                                    TextColumn = "Pickchu, pickachu, pikachu",
+                                    RatingColumn = 1,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Jessica",
-                                        LastName = "McGregor"
+                                        FirstNameColumn = "Jessica",
+                                        LastNameColumn = "McGregor"
                                     }
                                 },
                             }
                         },
                         Owner = new Owner()
                         {
-                            Name = "Jack London",
-                            Gym = "Brocks Gym",
-                            Country = new Country() { Name = "Kanto" }
+                            NameColumn = "Jack London",
+                            GymColumn = "Brocks Gym",
+                            CountryColumn = new Country() { NameColumn = "Kanto" }
                         }
                     },
                     new JoinPokemonOwner()
                     {
                         Pokemon = new Pokemon()
                         {
-                            Name = "Squirtle",
-                            DOB = new DateTime(1903, 1, 1),
+                            NameColumn = "Squirtle",
+                            DOBColumn = new DateTime(1903, 1, 1),
                             PokemonCategoryClt = new List<JoinPokemonCategory>()
                             {
                                 new JoinPokemonCategory
                                 {
-                                    Category = new Category() { Name = "Water" }
+                                    Category = new Category() { NameColumn = "Water" }
                                 }
                             },
                             ReviewClt = new List<Review>()
                             {
                                 new Review
                                 {
-                                    Title = "Squirtle",
-                                    Text = "squirtle is the best pokemon, because it is electric",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Squirtle",
+                                    TextColumn = "squirtle is the best pokemon, because it is electric",
+                                    RatingColumn = 5,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Teddy",
-                                        LastName = "Smith"
+                                        FirstNameColumn = "Teddy",
+                                        LastNameColumn = "Smith"
                                     }
                                 },
                                 new Review
                                 {
-                                    Title = "Squirtle",
-                                    Text = "Squirtle is the best a killing rocks",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Squirtle",
+                                    TextColumn = "Squirtle is the best a killing rocks",
+                                    RatingColumn = 5,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Taylor",
-                                        LastName = "Jones"
+                                        FirstNameColumn = "Taylor",
+                                        LastNameColumn = "Jones"
                                     }
                                 },
                                 new Review
                                 {
-                                    Title = "Squirtle",
-                                    Text = "squirtle, squirtle, squirtle",
-                                    Rating = 1,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Squirtle",
+                                    TextColumn = "squirtle, squirtle, squirtle",
+                                    RatingColumn = 1,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Jessica",
-                                        LastName = "McGregor"
+                                        FirstNameColumn = "Jessica",
+                                        LastNameColumn = "McGregor"
                                     }
                                 },
                             }
                         },
                         Owner = new Owner()
                         {
-                            Name = "Harry Potter",
-                            Gym = "Mistys Gym",
-                            Country = new Country() { Name = "Saffron City" }
+                            NameColumn = "Harry Potter",
+                            GymColumn = "Mistys Gym",
+                            CountryColumn = new Country() { NameColumn = "Saffron City" }
                         }
                     },
                     new JoinPokemonOwner()
                     {
                         Pokemon = new Pokemon()
                         {
-                            Name = "Venasuar",
-                            DOB = new DateTime(1903, 1, 1),
+                            NameColumn = "Venasuar",
+                            DOBColumn = new DateTime(1903, 1, 1),
                             PokemonCategoryClt = new List<JoinPokemonCategory>()
                             {
                                 new JoinPokemonCategory
                                 {
-                                    Category = new Category() { Name = "Leaf" }
+                                    Category = new Category() { NameColumn = "Leaf" }
                                 }
                             },
                             ReviewClt = new List<Review>()
                             {
                                 new Review
                                 {
-                                    Title = "Veasaur",
-                                    Text = "Venasuar is the best pokemon, because it is electric",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Veasaur",
+                                    TextColumn = "Venasuar is the best pokemon, because it is electric",
+                                    RatingColumn = 5,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Teddy",
-                                        LastName = "Smith"
+                                        FirstNameColumn = "Teddy",
+                                        LastNameColumn = "Smith"
                                     }
                                 },
                                 new Review
                                 {
-                                    Title = "Veasaur",
-                                    Text = "Venasuar is the best a killing rocks",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Veasaur",
+                                    TextColumn = "Venasuar is the best a killing rocks",
+                                    RatingColumn = 5,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Taylor",
-                                        LastName = "Jones"
+                                        FirstNameColumn = "Taylor",
+                                        LastNameColumn = "Jones"
                                     }
                                 },
                                 new Review
                                 {
-                                    Title = "Veasaur",
-                                    Text = "Venasuar, Venasuar, Venasuar",
-                                    Rating = 1,
-                                    Reviewer = new Reviewer()
+                                    TitleColumn = "Veasaur",
+                                    TextColumn = "Venasuar, Venasuar, Venasuar",
+                                    RatingColumn  = 1,
+                                    ReviewerColumn = new Reviewer()
                                     {
-                                        FirstName = "Jessica",
-                                        LastName = "McGregor"
+                                        FirstNameColumn = "Jessica",
+                                        LastNameColumn = "McGregor"
                                     }
                                 },
                             }
                         },
                         Owner = new Owner()
                         {
-                            Name = "Ash Ketchum",
-                            Gym = "Ashs Gym",
-                            Country = new Country() { Name = "Millet Town" }
+                            NameColumn = "Ash Ketchum",
+                            GymColumn = "Ashs Gym",
+                            CountryColumn = new Country() { NameColumn = "Millet Town" }
                         }
                     }
                 };

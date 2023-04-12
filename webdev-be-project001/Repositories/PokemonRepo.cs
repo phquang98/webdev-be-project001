@@ -15,7 +15,7 @@ namespace webdev_be_project001.Repositories
 
         public ICollection<Pokemon> GetPokemonClt()
         {
-            return _ctx.PokemonTable.OrderBy(poke => poke.ID).ToList();
+            return _ctx.PokemonTable.OrderBy(poke => poke.IdColumn).ToList();
         }
 
         public Pokemon GetPokemon(int idParam)
@@ -25,17 +25,27 @@ namespace webdev_be_project001.Repositories
 
         public Pokemon GetPokemon(string nameParam)
         {
-            throw new NotImplementedException();
+            return _ctx.PokemonTable.Where(poke => poke.NameColumn == nameParam).FirstOrDefault();
         }
 
         public decimal GetPokemonRating(int pokeId)
         {
-            throw new NotImplementedException();
+            var review = _ctx.ReviewTable.Where(record => record.PokemonColumn.IdColumn == pokeId);
+            Console.WriteLine(review);
+
+            if (review.Count() <= 0)
+            {
+                return 0;
+            }
+
+            var soBiChia = review.Sum(poke => poke.RatingColumn);
+            var soChia = review.Count();
+            return ((decimal)review.Sum(rating => rating.RatingColumn) / review.Count());   
         }
 
         public bool PokemonExists(int pokeId)
         {
-            throw new NotImplementedException();
+            return _ctx.PokemonTable.Any(poke => poke.IdColumn == pokeId);
         }
     }
 }

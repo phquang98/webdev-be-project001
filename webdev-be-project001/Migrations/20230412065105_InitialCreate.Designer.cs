@@ -12,7 +12,7 @@ using webdev_be_project001.Data;
 namespace webdev_be_project001.Migrations
 {
     [DbContext(typeof(DataCtx))]
-    [Migration("20230411093229_InitialCreate")]
+    [Migration("20230412065105_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,34 +27,34 @@ namespace webdev_be_project001.Migrations
 
             modelBuilder.Entity("webdev_be_project001.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdColumn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdColumn"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdColumn");
 
                     b.ToTable("CategoryTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Country", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdColumn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdColumn"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdColumn");
 
                     b.ToTable("CountryTable");
                 });
@@ -91,101 +91,101 @@ namespace webdev_be_project001.Migrations
 
             modelBuilder.Entity("webdev_be_project001.Models.Owner", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdColumn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdColumn"));
 
-                    b.Property<int>("CountryId")
+                    b.Property<int>("CountryColumnIdColumn")
                         .HasColumnType("int");
 
-                    b.Property<string>("Gym")
+                    b.Property<string>("GymColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdColumn");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("CountryColumnIdColumn");
 
                     b.ToTable("OwnerTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Pokemon", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("IdColumn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdColumn"));
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime>("DOBColumn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("IdColumn");
 
                     b.ToTable("PokemonTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Review", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdColumn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdColumn"));
 
-                    b.Property<int>("PokemonID")
+                    b.Property<int>("PokemonColumnIdColumn")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
+                    b.Property<int>("RatingColumn")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReviewerId")
+                    b.Property<int>("ReviewerColumnIdColumn")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("TextColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("TitleColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdColumn");
 
-                    b.HasIndex("PokemonID");
+                    b.HasIndex("PokemonColumnIdColumn");
 
-                    b.HasIndex("ReviewerId");
+                    b.HasIndex("ReviewerColumnIdColumn");
 
                     b.ToTable("ReviewTable");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Reviewer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdColumn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdColumn"));
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FirstNameColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("LastNameColumn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdColumn");
 
                     b.ToTable("ReviewerTable");
                 });
@@ -230,32 +230,32 @@ namespace webdev_be_project001.Migrations
 
             modelBuilder.Entity("webdev_be_project001.Models.Owner", b =>
                 {
-                    b.HasOne("webdev_be_project001.Models.Country", "Country")
+                    b.HasOne("webdev_be_project001.Models.Country", "CountryColumn")
                         .WithMany("OwnerClt")
-                        .HasForeignKey("CountryId")
+                        .HasForeignKey("CountryColumnIdColumn")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Country");
+                    b.Navigation("CountryColumn");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Review", b =>
                 {
-                    b.HasOne("webdev_be_project001.Models.Pokemon", "Pokemon")
+                    b.HasOne("webdev_be_project001.Models.Pokemon", "PokemonColumn")
                         .WithMany("ReviewClt")
-                        .HasForeignKey("PokemonID")
+                        .HasForeignKey("PokemonColumnIdColumn")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webdev_be_project001.Models.Reviewer", "Reviewer")
+                    b.HasOne("webdev_be_project001.Models.Reviewer", "ReviewerColumn")
                         .WithMany("ReviewClt")
-                        .HasForeignKey("ReviewerId")
+                        .HasForeignKey("ReviewerColumnIdColumn")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Pokemon");
+                    b.Navigation("PokemonColumn");
 
-                    b.Navigation("Reviewer");
+                    b.Navigation("ReviewerColumn");
                 });
 
             modelBuilder.Entity("webdev_be_project001.Models.Category", b =>

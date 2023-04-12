@@ -2,6 +2,11 @@
 
 Tech: .NET 7 + EF (code first)
 
+## How to run
+
+- in VS -> Package Manager Console -> `Add-Migration InitialCreate` -> `Update-Database`
+- in VS -> Terminal -> locate to where can see `Program.cs` -> `dotnet run seeddata`
+
 ## Reference
 
 - <https://www.youtube.com/watch?v=_8nLSsK5NDo&list=PL82C6-O4XrHdiS10BLh23x71ve9mQCln0>
@@ -11,6 +16,12 @@ Tech: .NET 7 + EF (code first)
 ### Program entry point
 
 - DI and all three A
+
+### Controllers
+
+- why use `DTO`: not returns all the DB + limit data that client send
+- `IActionResult`:
+- `ModelState`:
 
 ### Models
 
