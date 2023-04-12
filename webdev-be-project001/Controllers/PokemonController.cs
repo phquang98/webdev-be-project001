@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using webdev_be_project001.Dto;
 using webdev_be_project001.Interfaces;
 using webdev_be_project001.Models;
 
@@ -10,10 +11,12 @@ namespace webdev_be_project001.Controllers
     public class PokemonController : ControllerBase
     {
         private readonly IPokemonRepo _pokeRepo;
+        private readonly IMapper _mapper;
 
-        public PokemonController(IPokemonRepo pokeRepo)
+        public PokemonController(IPokemonRepo pokeRepo, IMapper mapperHere)
         {
             _pokeRepo = pokeRepo;
+            _mapper = mapperHere;
         }
 
 
@@ -22,9 +25,10 @@ namespace webdev_be_project001.Controllers
         public IActionResult CtrGetPokemonClt()
         {
 
-            var pokeRes = _pokeRepo.GetPokemonClt();
+            var pokeRes = _mapper.Map<List<PokemonDto>>(_pokeRepo.GetPokemonClt()); 
 
-            if(!ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -35,14 +39,14 @@ namespace webdev_be_project001.Controllers
         [HttpGet("{pokeIdHere}")]
         [ProducesResponseType(200, Type = typeof(Pokemon))]
         [ProducesResponseType(400)]
-        public IActionResult GetPokemon(int pokeIdHere)
+        public IActionResult CtrGetPokemon(int pokeIdHere)
         {
             if (!_pokeRepo.PokemonExists(pokeIdHere))
             {
                 return NotFound();
             }
 
-            var pokemonRes = _pokeRepo.GetPokemon(pokeIdHere);
+            var pokemonRes = _mapper.Map<PokemonDto>(_pokeRepo.GetPokemon(pokeIdHere));
 
             if (!ModelState.IsValid)
             {
@@ -55,7 +59,7 @@ namespace webdev_be_project001.Controllers
         [HttpGet("{pokeIdHere}/rating")]
         [ProducesResponseType(200, Type = typeof(decimal))]
         [ProducesResponseType(400)]
-        public IActionResult GetPokemonRating(int pokeIdHere)
+        public IActionResult CtrGetPokemonRating(int pokeIdHere)
         {
             if (!_pokeRepo.PokemonExists(pokeIdHere))
             {

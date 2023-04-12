@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // --- Add DI
 builder.Services.AddTransient<Seed>();
 builder.Services.AddScoped<IPokemonRepo, PokemonRepo>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // --- Add services
 
