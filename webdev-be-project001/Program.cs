@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
+using System.Text.Json.Serialization;
 using webdev_be_project001;
 using webdev_be_project001.Data;
 using webdev_be_project001.Interfaces;
@@ -8,11 +8,16 @@ using webdev_be_project001.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // --- Add DI
+// builder.Services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddTransient<Seed>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPokemonRepo, PokemonRepo>();
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICountryRepo, CountryRepo>();
+builder.Services.AddScoped<IOwnerRepo, OwnerRepo>();
+builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
+builder.Services.AddScoped<IReviewerRepo, ReviewerRepo>();
 
 // --- Add services
 
