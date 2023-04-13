@@ -67,5 +67,45 @@ namespace webdev_be_project001.Controllers
 
             return Ok(ctryRes);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateCountry([FromBody] CountryDto ctryDataHere)
+        {
+            if (ctryDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ctrySuspect = _ctryRepo
+                .GetCountryClt()
+                .Where(
+                    cate =>
+                        cate.NameColumn.Trim().ToLower() == ctryDataHere.NameColumn.Trim().ToLower()
+                )
+                .FirstOrDefault();
+
+            if (ctrySuspect != null)
+            {
+                ModelState.AddModelError("", "Country already exists!");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ctryModel = _mapper.Map<Country>(ctryDataHere);
+
+            if (!_ctryRepo.CreateCountry(ctryModel))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created!");
+        }
     }
 }

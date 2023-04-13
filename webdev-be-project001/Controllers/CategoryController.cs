@@ -69,5 +69,45 @@ namespace webdev_be_project001.Controllers
 
             return Ok(pokeCltRes);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateCategory([FromBody] CategoryDto cateDataHere)
+        {
+            if (cateDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var cateSuspect = _cateRepo
+                .GetCategoryClt()
+                .Where(
+                    cate =>
+                        cate.NameColumn.Trim().ToLower() == cateDataHere.NameColumn.Trim().ToLower()
+                )
+                .FirstOrDefault();
+
+            if (cateSuspect != null)
+            {
+                ModelState.AddModelError("", "Category already exists!");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var cateModel = _mapper.Map<Category>(cateDataHere);
+
+            if (!_cateRepo.CreateCategory(cateModel))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created!");
+        }
     }
 }

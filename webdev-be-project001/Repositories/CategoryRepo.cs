@@ -19,6 +19,13 @@ namespace webdev_be_project001.Repositories
             return _ctx.CategoryTable.Any(cate => cate.IdColumn == cateIdParam);
         }
 
+        public bool CreateCategory(Category cateParam)
+        {
+            // Change Tracker
+            _ctx.Add(cateParam);
+            return Save();
+        }
+
         public Category GetCategory(int cateIdParam)
         {
             return _ctx.CategoryTable.FirstOrDefault(cate => cate.IdColumn == cateIdParam);
@@ -36,6 +43,12 @@ namespace webdev_be_project001.Repositories
                 .Select(cate => cate.Pokemon)
                 .ToList();
             return queryRes;
+        }
+
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

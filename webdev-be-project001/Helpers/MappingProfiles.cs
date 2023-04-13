@@ -9,12 +9,19 @@ namespace webdev_be_project001.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<Pokemon, PokemonDto>();
-            CreateMap<Category, CategoryDto>();
-            CreateMap<Country, CountryDto>();
-            CreateMap<Owner, OwnerDto>();
-            CreateMap<Review, ReviewDto>();
-            CreateMap<Reviewer, ReviewerDto>();
+            CreateMap<Pokemon, PokemonDto>();   // READ
+            CreateMap<PokemonDto, Pokemon>();   // CREATE, UPDATE, DELETE
+            CreateMap<Category, CategoryDto>(); // READ
+            CreateMap<CategoryDto, Category>(); // CREATE, UPDATE, DELETE
+            CreateMap<Country, CountryDto>();   // READ
+            CreateMap<CountryDto, Country>();   // CREATE, UPDATE, DELETE
+            CreateMap<Owner, OwnerDto>();       // READ
+            CreateMap<OwnerDto, Owner>();       // CREATE, UPDATE, DELETE
+            CreateMap<Review, ReviewDto>();     // READ
+            CreateMap<ReviewDto, Review>();     // CREATE, UPDATE, DELETE
+            CreateMap<Reviewer, ReviewerDto>(); // READ
+            CreateMap<ReviewerDto, Reviewer>(); // CREATE, UPDATE, DELETE
+
         }
     }
 }

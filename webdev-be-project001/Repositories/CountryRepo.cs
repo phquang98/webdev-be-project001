@@ -41,5 +41,17 @@ namespace webdev_be_project001.Repositories
         {
             return _ctx.OwnerTable.Where(own => own.CountryColumn.IdColumn == ctryIdParam).ToList();
         }
+
+        public bool CreateCountry(Country ctryParam)
+        {
+            _ctx.Add(ctryParam);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

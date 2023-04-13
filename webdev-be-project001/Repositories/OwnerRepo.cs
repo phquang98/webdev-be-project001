@@ -13,6 +13,12 @@ namespace webdev_be_project001.Repositories
             _ctx = ctxHere;
         }
 
+        public bool CreateOwner(Owner ownerParam)
+        {
+             _ctx.Add(ownerParam);
+            return Save();
+        }
+
         public Owner GetOwner(int ownerIdParam)
         {
             return _ctx.OwnerTable.FirstOrDefault(owner => owner.IdColumn == ownerIdParam);
@@ -43,6 +49,12 @@ namespace webdev_be_project001.Repositories
         public bool OwnerExists(int ownerIdParam)
         {
             return _ctx.OwnerTable.Any(owner => owner.IdColumn == ownerIdParam);
+        }
+
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

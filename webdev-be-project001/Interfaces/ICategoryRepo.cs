@@ -8,5 +8,7 @@ namespace webdev_be_project001.Interfaces
         Category GetCategory(int cateIdParam);
         ICollection<Pokemon> GetPokemonCltByCategory(int cateIdParam);
         bool CategoryExists(int cateIdParam);
+        bool CreateCategory(Category cateParam);
+        bool Save();
     }
 }

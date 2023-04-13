@@ -11,11 +11,13 @@ namespace webdev_be_project001.Controllers
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerRepo _ownerRepo;
+        private readonly ICountryRepo _ctryRepo;
         private readonly IMapper _mapper;
 
-        public OwnerController(IOwnerRepo ownerRepoHere, IMapper mapperHere)
+        public OwnerController(IOwnerRepo ownerRepoHere, ICountryRepo ctrryRepoHere , IMapper mapperHere)
         {
             _ownerRepo = ownerRepoHere;
+            _ctryRepo = ctrryRepoHere;
             _mapper = mapperHere;
         }
 
@@ -71,6 +73,49 @@ namespace webdev_be_project001.Controllers
             }
 
             return Ok(pokeClt);
+        }
+
+        // NOTE: create Owner must have Country
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateOwner([FromQuery] int ctryIdHere,[FromBody] OwnerDto ownerDataHere)
+        {
+            if (ownerDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ownerSuspect = _ownerRepo
+                .GetOwnerClt()
+                .Where(
+                    owner =>
+                        owner.NameColumn.Trim().ToLower() == ownerDataHere.NameColumn.Trim().ToLower()
+                )
+                .FirstOrDefault();
+
+            if (ownerSuspect != null)
+            {
+                ModelState.AddModelError("", "Owner already exists!");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ownerModel = _mapper.Map<Owner>(ownerDataHere);
+
+            ownerModel.CountryColumn = _ctryRepo.GetCountry(ctryIdHere);
+
+            if (!_ownerRepo.CreateOwner(ownerModel))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created!");
         }
     }
 }
