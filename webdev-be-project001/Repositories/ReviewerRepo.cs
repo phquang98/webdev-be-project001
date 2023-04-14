@@ -15,6 +15,12 @@ namespace webdev_be_project001.Repositories
             _ctx = ctxHere;
         }
 
+        public bool CreateReviewer(Reviewer reviewerDataParam)
+        {
+            _ctx.Add(reviewerDataParam);
+            return Save();
+        }
+
         // TODO: notice this part, diff from other
         public ICollection<Review> GetReviewCltByReviewer(int reviewerIdParam)
         {
@@ -39,6 +45,12 @@ namespace webdev_be_project001.Repositories
         public bool ReviewerExists(int reviewerIdParam)
         {
             return _ctx.ReviewerTable.Any(reviewer => reviewer.IdColumn == reviewerIdParam);
+        }
+
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

@@ -8,5 +8,8 @@ namespace webdev_be_project001.Interfaces
         Reviewer GetReviewer(int reviewerIdParam);
         ICollection<Review> GetReviewCltByReviewer(int reviewerIdParam);
         bool ReviewerExists(int reviewerIdParam);
+        bool CreateReviewer(Reviewer reviewerDataParam);
+        bool Save();
+       
     }
 }

@@ -49,5 +49,36 @@ namespace webdev_be_project001.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public bool CreatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam)
+        {
+            // pokemon depends on a PokemonOwner
+            var pokemonOwnerRecord = _ctx.OwnerTable.FirstOrDefault(owner => owner.IdColumn == ownerIdParam);
+            var pokemonOwnerTmp = new JoinPokemonOwner()
+            {
+                Owner = pokemonOwnerRecord,
+                Pokemon = pokemonParam
+            };
+            _ctx.Add(pokemonOwnerTmp);
+
+            // pokemon depends on a PokemonCategory
+            var pokemonCategoryRecord = _ctx.CategoryTable.FirstOrDefault(cate => cate.IdColumn == cateIdParam);
+            var pokemonCategoryTmp = new JoinPokemonCategory()
+            {
+                Category = pokemonCategoryRecord,
+                Pokemon = pokemonParam
+            };
+            _ctx.Add(pokemonCategoryTmp);
+
+            _ctx.Add(pokemonParam);
+
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace webdev_be_project001.Helpers
     {
         public MappingProfiles()
         {
+            // can be written as `CreateMap<Owner, OwnerDTO>().ReverseMap();`
+            // not tested yet
             CreateMap<Pokemon, PokemonDto>();   // READ
             CreateMap<PokemonDto, Pokemon>();   // CREATE, UPDATE, DELETE
             CreateMap<Category, CategoryDto>(); // READ

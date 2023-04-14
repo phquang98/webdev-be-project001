@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using webdev_be_project001.Dto;
 using webdev_be_project001.Interfaces;
 using webdev_be_project001.Models;
+using webdev_be_project001.Repositories;
 
 namespace webdev_be_project001.Controllers
 {
@@ -71,6 +72,46 @@ namespace webdev_be_project001.Controllers
             }
 
             return Ok(rating);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreatePokemon([FromQuery] int ownerIdHere, [FromQuery] int cateIdHere, [FromBody] PokemonDto pokeDataHere)
+        {
+            if (pokeDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var pokeSuspect = _pokeRepo
+                .GetPokemonClt()
+                .Where(
+                    poke =>
+                        poke.NameColumn.Trim().ToLower() == pokeDataHere.NameColumn.Trim().ToLower()
+                )
+                .FirstOrDefault();
+
+            if (pokeSuspect != null)
+            {
+                ModelState.AddModelError("", "Pokemon already exists!");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var pokeModel = _mapper.Map<Pokemon>(pokeDataHere);
+
+            if (!_pokeRepo.CreatePokemon(ownerIdHere, cateIdHere,pokeModel))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created!");
         }
     }
 }

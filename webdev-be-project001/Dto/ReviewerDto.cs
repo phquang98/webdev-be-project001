@@ -8,6 +8,6 @@ namespace webdev_be_project001.Dto
         public string FirstNameColumn { get; set; }
         public string LastNameColumn { get; set; }
         // fixed by Russian commenter in video 9 (in origin, he delete this line)
-        public ICollection<ReviewDto> ReviewClt { get; set; }
+        // public ICollection<ReviewDto> ReviewClt { get; set; }
     }
 }

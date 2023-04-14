@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using webdev_be_project001.Dto;
 using webdev_be_project001.Interfaces;
 using webdev_be_project001.Models;
+using webdev_be_project001.Repositories;
 
 namespace webdev_be_project001.Controllers
 {
@@ -71,6 +72,46 @@ namespace webdev_be_project001.Controllers
             }
 
             return Ok(reviewClt);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateReviewer([FromBody] ReviewerDto reviewerDataHere)
+        {
+            if (reviewerDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewerSuspect = _reviewerRepo
+                .GetReviewerClt()
+                .Where(
+                    reviewer =>
+                        reviewer.LastNameColumn.Trim().ToLower() == reviewerDataHere.LastNameColumn.Trim().ToLower()
+                )
+                .FirstOrDefault();
+
+            if (reviewerSuspect != null)
+            {
+                ModelState.AddModelError("", "Reviewer already exists!");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewerModel = _mapper.Map<Reviewer>(reviewerDataHere);
+
+            if (!_reviewerRepo.CreateReviewer(reviewerModel))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created!");
         }
     }
 }

@@ -9,5 +9,7 @@ namespace webdev_be_project001.Interfaces
         Pokemon GetPokemon(string nameParam);
         decimal GetPokemonRating(int pokeIdHere);
         bool PokemonExists(int pokeIdHere);
+        bool CreatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam);
+        bool Save();
     }
 }

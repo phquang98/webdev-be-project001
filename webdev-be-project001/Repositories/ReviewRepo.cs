@@ -13,6 +13,12 @@ namespace webdev_be_project001.Repositories
             _ctx = ctxHere;
         }
 
+        public bool CreaateReview(Review reviewDataParam)
+        {
+            _ctx.Add(reviewDataParam);
+            return Save();
+        }
+
         public Review GetReview(int reviewIdParam)
         {
             return _ctx.ReviewTable.FirstOrDefault(review => review.IdColumn == reviewIdParam);
@@ -33,6 +39,12 @@ namespace webdev_be_project001.Repositories
         public bool ReviewExists(int reviewIdParam)
         {
             return _ctx.ReviewTable.Any(review => review.IdColumn == reviewIdParam);
+        }
+
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }
