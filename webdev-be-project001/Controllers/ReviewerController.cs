@@ -77,7 +77,7 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateReviewer([FromBody] ReviewerDto reviewerDataHere)
+        public IActionResult CtrCreateReviewer([FromBody] ReviewerDto reviewerDataHere)
         {
             if (reviewerDataHere == null)
             {
@@ -118,7 +118,7 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateReviewer(
+        public IActionResult CtrUpdateReviewer(
             int reviewerIdHere,
             [FromBody] ReviewerDto reviewerDataHere
         )
@@ -148,6 +148,33 @@ namespace webdev_be_project001.Controllers
             if (!_reviewerRepo.UpdateReviewer(reviewerModel))
             {
                 ModelState.AddModelError("", "Something went wrong with updating reviewer!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{reviewerIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult CtrDeleteReviewer(int reviewerIdHere)
+        {
+            if (!_reviewerRepo.ReviewerExists(reviewerIdHere))
+            {
+                return NotFound();
+            }
+
+            var removeReviewer = _reviewerRepo.GetReviewer(reviewerIdHere);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewerRepo.DeleteReviewer(removeReviewer))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting reviewer!");
                 return StatusCode(500, ModelState);
             }
 

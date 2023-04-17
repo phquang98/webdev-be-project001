@@ -86,5 +86,11 @@ namespace webdev_be_project001.Repositories
             _ctx.Update(pokemonParam);
             return Save();
         }
+
+        public bool DeletePokemon(Pokemon pokemonParam)
+        {
+            _ctx.Remove(pokemonParam);
+            return Save();
+        }
     }
 }

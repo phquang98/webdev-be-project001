@@ -11,6 +11,7 @@ namespace webdev_be_project001.Interfaces
         bool PokemonExists(int pokeIdParam);
         bool CreatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam);
         bool UpdatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam);
+        bool DeletePokemon(Pokemon pokemonParam);
 
         bool Save();
     }

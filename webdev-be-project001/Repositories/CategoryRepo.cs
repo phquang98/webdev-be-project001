@@ -26,6 +26,12 @@ namespace webdev_be_project001.Repositories
             return Save();
         }
 
+        public bool DeleteCategory(Category cateIdParam)
+        {
+            _ctx.Remove(cateIdParam);
+            return Save();
+        }
+
         public Category GetCategory(int cateIdParam)
         {
             return _ctx.CategoryTable.FirstOrDefault(cate => cate.IdColumn == cateIdParam);

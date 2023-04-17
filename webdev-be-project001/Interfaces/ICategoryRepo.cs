@@ -10,6 +10,7 @@ namespace webdev_be_project001.Interfaces
         bool CategoryExists(int cateIdParam);
         bool CreateCategory(Category cateParam);
         bool UpdateCategory(Category cateParam);
+        bool DeleteCategory(Category cateIdParam);
         bool Save();
     }
 }

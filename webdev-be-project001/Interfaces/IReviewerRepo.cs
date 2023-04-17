@@ -10,6 +10,7 @@ namespace webdev_be_project001.Interfaces
         bool ReviewerExists(int reviewerIdParam);
         bool CreateReviewer(Reviewer reviewerDataParam);
         bool UpdateReviewer(Reviewer reviewerDataParam);
+        bool DeleteReviewer(Reviewer reviewerIdParam);
         bool Save();
        
     }

@@ -19,6 +19,18 @@ namespace webdev_be_project001.Repositories
             return Save();
         }
 
+        public bool DeleteReview(Review reviewDataParam)
+        {
+            _ctx.Remove(reviewDataParam);
+            return Save();
+        }
+
+        public bool DeleteReviewClt(List<Review> reviewDataCltParam)
+        {
+            _ctx.RemoveRange(reviewDataCltParam);
+            return Save();
+        }
+
         public Review GetReview(int reviewIdParam)
         {
             return _ctx.ReviewTable.FirstOrDefault(review => review.IdColumn == reviewIdParam);

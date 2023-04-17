@@ -19,6 +19,12 @@ namespace webdev_be_project001.Repositories
             return Save();
         }
 
+        public bool DeleteOwner(Owner ownerParam)
+        {
+            _ctx.Remove(ownerParam);
+            return Save();
+        }
+
         public Owner GetOwner(int ownerIdParam)
         {
             return _ctx.OwnerTable.FirstOrDefault(owner => owner.IdColumn == ownerIdParam);
@@ -57,7 +63,7 @@ namespace webdev_be_project001.Repositories
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateCountry(Owner ownerParam)
+        public bool UpdateOwner(Owner ownerParam)
         {
             _ctx.Update(ownerParam);
             return Save();

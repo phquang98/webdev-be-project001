@@ -79,7 +79,7 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateOwner([FromQuery] int ownerIdHere,[FromBody] OwnerDto ownerDataHere)
+        public IActionResult CtrCreateOwner([FromQuery] int ownerIdHere,[FromBody] OwnerDto ownerDataHere)
         {
             if (ownerDataHere == null)
             {
@@ -122,7 +122,7 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateOwner(int ownerIdHere, [FromBody] OwnerDto ownerDataHere)
+        public IActionResult CtrUpdateOwner(int ownerIdHere, [FromBody] OwnerDto ownerDataHere)
         {
             if (ownerDataHere == null)
             {
@@ -146,9 +146,36 @@ namespace webdev_be_project001.Controllers
 
             var ownerModel = _mapper.Map<Owner>(ownerDataHere);
 
-            if (!_ownerRepo.UpdateCountry(ownerModel))
+            if (!_ownerRepo.UpdateOwner(ownerModel))
             {
                 ModelState.AddModelError("", "Something went wrong with updating owner!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{ownerIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult CtrDeleteOwner(int ownerIdHere)
+        {
+            if (!_ownerRepo.OwnerExists(ownerIdHere))
+            {
+                return NotFound();
+            }
+
+            var removeOwner = _ownerRepo.GetOwner(ownerIdHere);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_ownerRepo.DeleteOwner(removeOwner))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting owner!");
                 return StatusCode(500, ModelState);
             }
 

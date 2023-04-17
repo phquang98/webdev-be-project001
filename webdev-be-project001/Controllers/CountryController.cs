@@ -71,7 +71,7 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateCountry([FromBody] CountryDto ctryDataHere)
+        public IActionResult CtrCreateCountry([FromBody] CountryDto ctryDataHere)
         {
             if (ctryDataHere == null)
             {
@@ -112,7 +112,7 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateCountry(int ctryIdHere, [FromBody] CountryDto ctryDataHere)
+        public IActionResult CtrUpdateCountry(int ctryIdHere, [FromBody] CountryDto ctryDataHere)
         {
             if (ctryDataHere == null)
             {
@@ -139,6 +139,33 @@ namespace webdev_be_project001.Controllers
             if (!_ctryRepo.UpdateCountry(ctryModel))
             {
                 ModelState.AddModelError("", "Something went wrong with updating country!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{ctryIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)] 
+        [ProducesResponseType(404)]
+        public IActionResult CtrDeleteCategory(int ctryIdHere)
+        {
+            if (!_ctryRepo.CountryExists(ctryIdHere))
+            {
+                return NotFound();
+            }
+
+            var removeCtry = _ctryRepo.GetCountry(ctryIdHere);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_ctryRepo.DeleteCountry(removeCtry))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting country!");
                 return StatusCode(500, ModelState);
             }
 

@@ -59,5 +59,11 @@ namespace webdev_be_project001.Repositories
             _ctx.Update(ctryParam);
             return Save();
         }
+
+        public bool DeleteCountry(Country ctryParam)
+        {
+            _ctx.Remove(ctryParam);
+            return Save();
+        }
     }
 }

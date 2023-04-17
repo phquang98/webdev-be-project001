@@ -2,6 +2,8 @@
 
 Tech: .NET 7 + EF (code first)
 
+- update ops can't update relationships, only update core fields
+
 ## How to run
 
 - in VS -> Package Manager Console -> `Add-Migration InitialCreate` -> `Update-Database`
@@ -39,8 +41,6 @@ Tech: .NET 7 + EF (code first)
 - `Add-Migration InitialCreate` -> `Update-Database` -> `dotnet run seeddata` at the location of `Program.cs`
 
 ## Notes
-
-- update ops can't update relationships, only update core fields
 
 <details>
 <summary>How to get a connection string</summary>

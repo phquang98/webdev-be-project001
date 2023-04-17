@@ -82,7 +82,7 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateReview(
+        public IActionResult CtrCreateReview(
             [FromQuery] int reviewerIdHere,
             [FromQuery] int pokeIdHere,
             [FromBody] ReviewDto reviewDataHere
@@ -132,7 +132,7 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateReview(
+        public IActionResult CtrUpdateReview(
             int reviewIdHere,
             [FromBody] ReviewDto reviewDataHere
         )
@@ -162,6 +162,33 @@ namespace webdev_be_project001.Controllers
             if (!_reviewRepo.UpdateReview(reviewModel))
             {
                 ModelState.AddModelError("", "Something went wrong with updating review!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{reviewIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult CtrDeleteReview(int reviewIdHere)
+        {
+            if (!_reviewRepo.ReviewExists(reviewIdHere))
+            {
+                return NotFound();
+            }
+
+            var removeReview = _reviewRepo.GetReview(reviewIdHere);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewRepo.DeleteReview(removeReview))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting review!");
                 return StatusCode(500, ModelState);
             }
 

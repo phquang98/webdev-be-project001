@@ -21,6 +21,12 @@ namespace webdev_be_project001.Repositories
             return Save();
         }
 
+        public bool DeleteReviewer(Reviewer reviewerIdParam)
+        {
+            _ctx.Remove(reviewerIdParam);
+            return Save();
+        }
+
         // TODO: notice this part, diff from other
         public ICollection<Review> GetReviewCltByReviewer(int reviewerIdParam)
         {

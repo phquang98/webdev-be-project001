@@ -73,7 +73,7 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateCategory([FromBody] CategoryDto cateDataHere)
+        public IActionResult CtrCreateCategory([FromBody] CategoryDto cateDataHere)
         {
             if (cateDataHere == null)
             {
@@ -114,7 +114,7 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateCategory(int cateIdHere, [FromBody] CategoryDto cateDataHere)
+        public IActionResult CtrUpdateCategory(int cateIdHere, [FromBody] CategoryDto cateDataHere)
         {
             if (cateDataHere == null)
             {
@@ -146,5 +146,34 @@ namespace webdev_be_project001.Controllers
 
             return NoContent();
         }
+
+
+        [HttpDelete("{cateIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult CtrDeleteCategory(int cateIdHere)
+        {
+            if (!_cateRepo.CategoryExists(cateIdHere))
+            {
+                return NotFound();
+            }
+
+            var removeCate = _cateRepo.GetCategory(cateIdHere);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_cateRepo.DeleteCategory(removeCate))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting category!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
     }
 }

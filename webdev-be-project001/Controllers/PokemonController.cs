@@ -12,12 +12,12 @@ namespace webdev_be_project001.Controllers
     public class PokemonController : ControllerBase
     {
         private readonly IPokemonRepo _pokeRepo;
-        private readonly IReviewerRepo _reviewRepo;
+        private readonly IReviewRepo _reviewRepo;
         private readonly IMapper _mapper;
 
         public PokemonController(
             IPokemonRepo pokeRepo,
-            IReviewerRepo reviewRepo,
+            IReviewRepo reviewRepo,
             IMapper mapperHere
         )
         {
@@ -83,7 +83,7 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreatePokemon(
+        public IActionResult CtrCreatePokemon(
             [FromQuery] int ownerIdHere,
             [FromQuery] int cateIdHere,
             [FromBody] PokemonDto pokeDataHere
@@ -128,7 +128,7 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdatePokemon(
+        public IActionResult CtrUpdatePokemon(
             int pokeIdHere,
             [FromQuery] int ownerIdHere,
             [FromQuery] int cateIdHere,
@@ -160,6 +160,39 @@ namespace webdev_be_project001.Controllers
             if (!_pokeRepo.UpdatePokemon(ownerIdHere, cateIdHere, pokemonModel))
             {
                 ModelState.AddModelError("", "Something went wrong with updating pokemon!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{pokeIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult CtrDeletePokemon(int pokeIdHere)
+        {
+            if (!_pokeRepo.PokemonExists(pokeIdHere))
+            {
+                return NotFound();
+            }
+
+            var removeReviewClt = _reviewRepo.GetReviewCltOfAPokemon(pokeIdHere);
+            var removePokemon = _pokeRepo.GetPokemon(pokeIdHere);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewRepo.DeleteReviewClt(removeReviewClt.ToList()))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting reviews relating to the poke!");
+            }
+
+            if (!_pokeRepo.DeletePokemon(removePokemon))
+            {
+                ModelState.AddModelError("", "Something went wrong with deleting pokemon!");
                 return StatusCode(500, ModelState);
             }
 

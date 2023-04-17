@@ -11,6 +11,7 @@ namespace webdev_be_project001.Interfaces
         bool CountryExists(int ctryIdParam);
         bool CreateCountry(Country ctryParam);
         bool UpdateCountry(Country ctryParam);
+        bool DeleteCountry(Country ctryParam);
         bool Save();
     }
 }
