@@ -12,11 +12,17 @@ namespace webdev_be_project001.Controllers
     public class PokemonController : ControllerBase
     {
         private readonly IPokemonRepo _pokeRepo;
+        private readonly IReviewerRepo _reviewRepo;
         private readonly IMapper _mapper;
 
-        public PokemonController(IPokemonRepo pokeRepo, IMapper mapperHere)
+        public PokemonController(
+            IPokemonRepo pokeRepo,
+            IReviewerRepo reviewRepo,
+            IMapper mapperHere
+        )
         {
             _pokeRepo = pokeRepo;
+            _reviewRepo = reviewRepo;
             _mapper = mapperHere;
         }
 
@@ -77,7 +83,11 @@ namespace webdev_be_project001.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreatePokemon([FromQuery] int ownerIdHere, [FromQuery] int cateIdHere, [FromBody] PokemonDto pokeDataHere)
+        public IActionResult CreatePokemon(
+            [FromQuery] int ownerIdHere,
+            [FromQuery] int cateIdHere,
+            [FromBody] PokemonDto pokeDataHere
+        )
         {
             if (pokeDataHere == null)
             {
@@ -105,13 +115,55 @@ namespace webdev_be_project001.Controllers
 
             var pokeModel = _mapper.Map<Pokemon>(pokeDataHere);
 
-            if (!_pokeRepo.CreatePokemon(ownerIdHere, cateIdHere,pokeModel))
+            if (!_pokeRepo.CreatePokemon(ownerIdHere, cateIdHere, pokeModel))
             {
                 ModelState.AddModelError("", "Something went wrong while saving!");
                 return StatusCode(500, ModelState);
             }
 
             return Ok("Successfully created!");
+        }
+
+        [HttpPut("{pokeIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdatePokemon(
+            int pokeIdHere,
+            [FromQuery] int ownerIdHere,
+            [FromQuery] int cateIdHere,
+            [FromBody] PokemonDto pokeDataHere
+        )
+        {
+            if (pokeDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (pokeIdHere != pokeDataHere.IdColumn)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_pokeRepo.PokemonExists(pokeIdHere))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var pokemonModel = _mapper.Map<Pokemon>(pokeDataHere);
+
+            if (!_pokeRepo.UpdatePokemon(ownerIdHere, cateIdHere, pokemonModel))
+            {
+                ModelState.AddModelError("", "Something went wrong with updating pokemon!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

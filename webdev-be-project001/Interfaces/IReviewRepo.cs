@@ -9,6 +9,7 @@ namespace webdev_be_project001.Interfaces
         ICollection<Review> GetReviewCltOfAPokemon(int pokeIdParam);
         bool ReviewExists(int reviewIdParam);
         bool CreaateReview(Review reviewDataParam);
+        bool UpdateReview(Review reviewDataParam);
         bool Save();
     }
 }

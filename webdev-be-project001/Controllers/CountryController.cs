@@ -107,5 +107,42 @@ namespace webdev_be_project001.Controllers
 
             return Ok("Successfully created!");
         }
+
+        [HttpPut("{ctryIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateCountry(int ctryIdHere, [FromBody] CountryDto ctryDataHere)
+        {
+            if (ctryDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (ctryIdHere != ctryDataHere.IdColumn)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_ctryRepo.CountryExists(ctryIdHere))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ctryModel = _mapper.Map<Country>(ctryDataHere);
+
+            if (!_ctryRepo.UpdateCountry(ctryModel))
+            {
+                ModelState.AddModelError("", "Something went wrong with updating country!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }

@@ -52,5 +52,11 @@ namespace webdev_be_project001.Repositories
             var saved = _ctx.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool UpdateReviewer(Reviewer reviewerDataParam)
+        {
+            _ctx.Update(reviewerDataParam);
+            return Save();
+        }
     }
 }

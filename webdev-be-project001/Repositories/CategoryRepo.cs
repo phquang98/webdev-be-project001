@@ -50,5 +50,11 @@ namespace webdev_be_project001.Repositories
             var saved = _ctx.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool UpdateCategory(Category cateParam)
+        {
+            _ctx.Update(cateParam);
+            return Save();
+        }
     }
 }

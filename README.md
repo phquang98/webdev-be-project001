@@ -40,6 +40,8 @@ Tech: .NET 7 + EF (code first)
 
 ## Notes
 
+- update ops can't update relationships, only update core fields
+
 <details>
 <summary>How to get a connection string</summary>
 

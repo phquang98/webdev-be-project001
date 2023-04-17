@@ -23,14 +23,14 @@ namespace webdev_be_project001.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
         public IActionResult CtrGetCategoryClt()
         {
-            var cateRes = _mapper.Map<List<CategoryDto>>(_cateRepo.GetCategoryClt());
+            var cateModel = _mapper.Map<List<CategoryDto>>(_cateRepo.GetCategoryClt());
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(cateRes);
+            return Ok(cateModel);
         }
 
         [HttpGet("{cateIdHere}")]
@@ -43,14 +43,14 @@ namespace webdev_be_project001.Controllers
                 return NotFound();
             }
 
-            var cateRes = _mapper.Map<CategoryDto>(_cateRepo.GetCategory(cateIdHere));
+            var cateModel = _mapper.Map<CategoryDto>(_cateRepo.GetCategory(cateIdHere));
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(cateRes);
+            return Ok(cateModel);
         }
 
         [HttpGet("pokemon/{cateIdHere}")]
@@ -108,6 +108,43 @@ namespace webdev_be_project001.Controllers
             }
 
             return Ok("Successfully created!");
+        }
+
+        [HttpPut("{cateIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateCategory(int cateIdHere, [FromBody] CategoryDto cateDataHere)
+        {
+            if (cateDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (cateIdHere != cateDataHere.IdColumn)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_cateRepo.CategoryExists(cateIdHere))
+            {
+                return NotFound();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var cateModel = _mapper.Map<Category>(cateDataHere);
+
+            if (!_cateRepo.UpdateCategory(cateModel))
+            {
+                ModelState.AddModelError("", "Something went wrong with updating category!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

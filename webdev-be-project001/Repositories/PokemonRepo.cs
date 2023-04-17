@@ -28,10 +28,10 @@ namespace webdev_be_project001.Repositories
             return _ctx.PokemonTable.Where(poke => poke.NameColumn == nameParam).FirstOrDefault();
         }
 
-        public decimal GetPokemonRating(int pokeIdHere)
+        public decimal GetPokemonRating(int pokeIdParam)
         {
             var review = _ctx.ReviewTable.Where(
-                record => record.PokemonColumn.IdColumn == pokeIdHere
+                record => record.PokemonColumn.IdColumn == pokeIdParam
             );
             Console.WriteLine(review);
 
@@ -45,9 +45,9 @@ namespace webdev_be_project001.Repositories
             return ((decimal)review.Sum(rating => rating.RatingColumn) / review.Count());
         }
 
-        public bool PokemonExists(int pokeIdHere)
+        public bool PokemonExists(int pokeIdParam)
         {
-            throw new NotImplementedException();
+            return _ctx.PokemonTable.Any(poke => poke.IdColumn == pokeIdParam);
         }
 
         public bool CreatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam)
@@ -79,6 +79,12 @@ namespace webdev_be_project001.Repositories
         {
             var saved = _ctx.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        public bool UpdatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam)
+        {
+            _ctx.Update(pokemonParam);
+            return Save();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace webdev_be_project001.Interfaces
         ICollection<Pokemon> GetPokemonByOwner(int ownerIdParam);
         bool OwnerExists(int ownerIdParam);
         bool CreateOwner(Owner ownerParam);
+        bool UpdateCountry(Owner ownerParam);
         bool Save();
     }
 }

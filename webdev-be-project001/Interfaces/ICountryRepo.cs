@@ -10,6 +10,7 @@ namespace webdev_be_project001.Interfaces
         ICollection<Owner> GetOwnersFromACountry(int ctryIdParam);
         bool CountryExists(int ctryIdParam);
         bool CreateCountry(Country ctryParam);
+        bool UpdateCountry(Country ctryParam);
         bool Save();
     }
 }

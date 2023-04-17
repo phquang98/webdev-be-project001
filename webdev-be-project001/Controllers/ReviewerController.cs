@@ -113,5 +113,45 @@ namespace webdev_be_project001.Controllers
 
             return Ok("Successfully created!");
         }
+
+        [HttpPut("{reviewerIdHere}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateReviewer(
+            int reviewerIdHere,
+            [FromBody] ReviewerDto reviewerDataHere
+        )
+        {
+            if (reviewerDataHere == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (reviewerIdHere != reviewerDataHere.IdColumn)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewerRepo.ReviewerExists(reviewerIdHere))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewerModel = _mapper.Map<Reviewer>(reviewerDataHere);
+
+            if (!_reviewerRepo.UpdateReviewer(reviewerModel))
+            {
+                ModelState.AddModelError("", "Something went wrong with updating reviewer!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }

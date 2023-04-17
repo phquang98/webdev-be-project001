@@ -53,5 +53,11 @@ namespace webdev_be_project001.Repositories
             var saved = _ctx.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool UpdateCountry(Country ctryParam)
+        {
+            _ctx.Update(ctryParam);
+            return Save();
+        }
     }
 }

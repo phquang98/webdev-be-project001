@@ -7,9 +7,11 @@ namespace webdev_be_project001.Interfaces
         ICollection<Pokemon> GetPokemonClt();
         Pokemon GetPokemon(int pokeIdParam);
         Pokemon GetPokemon(string nameParam);
-        decimal GetPokemonRating(int pokeIdHere);
-        bool PokemonExists(int pokeIdHere);
+        decimal GetPokemonRating(int pokeIdParam);
+        bool PokemonExists(int pokeIdParam);
         bool CreatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam);
+        bool UpdatePokemon(int ownerIdParam, int cateIdParam, Pokemon pokemonParam);
+
         bool Save();
     }
 }
